@@ -3,7 +3,7 @@ import * as Images from './services/images';
 import { useState, useEffect, FormEvent } from 'react';
 import { Image } from './types/image';
 import { ImageItem } from './components/ImageItem';
-
+import AddIcon from './assets/images/add-icon.png';
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -57,6 +57,21 @@ const App = () => {
 
       {!loading && images.length > 0 &&
         <C.Grid>
+            <C.Card>
+              <C.UploadForm method="POST" onSubmit={handleSubmitForm}>
+                <C.AreaAddFile>
+                  <label htmlFor='selecao-arquivo'>
+                  <C.AddFile>
+                    <img src={AddIcon}/>
+                    <p>Adicione um arquivo</p>
+                  </C.AddFile>
+                  </label>
+                  <input type="file" name="image" id='selecao-arquivo'/>
+
+                </C.AreaAddFile>
+                {/* <input type="submit" value="Enviar" /> */}
+              </C.UploadForm>
+            </C.Card>
             {images.map((item, index)=>(
               <ImageItem key={index} url={item.url} name={item.name} />
             ))}

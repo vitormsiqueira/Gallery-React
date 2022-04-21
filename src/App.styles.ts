@@ -35,3 +35,44 @@ export const Grid = styled.div`
     gap: 10px;
 `;
 
+export const Card = styled.div`
+    max-width: 100%;
+    display: contents;
+
+`;
+
+export const UploadForm = styled.form`
+    background-color: #08847e;
+    border-radius: 8px;
+    padding: 10px;
+
+    input[type=file] {
+        display: none;
+    }
+
+`;
+
+export const AreaAddFile = styled.div`
+    height: 100%;
+`;
+
+export const AddFile = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+    height: 100%;
+    align-content: center;
+    justify-content: center;
+
+    img{
+        min-width: 30px;
+        max-width: 50px;
+    }
+
+    p{
+        width: 100%;
+        text-align: center;
+        font-weight: 600;
+        margin: 0;
+    }
+`;
