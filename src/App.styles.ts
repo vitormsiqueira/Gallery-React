@@ -45,15 +45,36 @@ export const UploadForm = styled.form`
     background-color: #08847e;
     border-radius: 8px;
     padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 180px;
+
+    input[type=submit] {
+        background-color: #ffff;
+        color: #1a6a6b;
+        font-size: 14px;
+        border-radius: 8px;
+        border: 0;
+        padding: 10px 35px;
+        cursor: pointer;
+        width: 100%; 
+
+        &:hover{
+            opacity: .8;
+        }
+    }
 
     input[type=file] {
         display: none;
     }
 
+
 `;
 
 export const AreaAddFile = styled.div`
-    height: 100%;
+    height: 80%;
+    width: 100%;
+    align-self: center;
 `;
 
 export const AddFile = styled.div`
@@ -72,7 +93,17 @@ export const AddFile = styled.div`
     p{
         width: 100%;
         text-align: center;
-        font-weight: 600;
+        font-weight: 500;
         margin: 0;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 200px;
+      
     }
+`;
+
+
+export const Message = styled.div`
+    padding: 20px;
 `;
