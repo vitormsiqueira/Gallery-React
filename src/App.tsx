@@ -4,13 +4,14 @@ import { useState, useEffect, FormEvent, ChangeEvent } from 'react';
 import { Image } from './types/image';
 import { ImageItem } from './components/ImageItem';
 import AddIcon from './assets/images/add-icon.png';
+import UploadIcon from './assets/images/upload-icon.png';
 
 const App = () => {
   const [loading, setLoading] = useState(false);
   const [images, setImages] = useState<Image[]>([]);
   const [selectedImage, setSelectedImage] = useState('');
   const [loadImage, setLoadImage] = useState(false);
-  const [uploding, setUploading] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(()=>{
     const getImages = async () => {
@@ -40,13 +41,14 @@ const App = () => {
         let newImageList = [...images];
         newImageList.push(result);
         setImages(newImageList);
+        setLoadImage(false);
       }
     }
   }
 
   const handleSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
     setLoadImage(false);
-    let nameFile = setSelectedImage(e.target.files![0].name);
+    setSelectedImage(e.target.files![0].name);
     setLoadImage(true);
   }
 
@@ -56,7 +58,6 @@ const App = () => {
     <C.Area>
       <C.Header>Galeria de Imagens</C.Header>
       
-      {/* Listagem de Imagens */}
       {loading && 
         <C.Loading>
           <div>⌛ Carregando...</div>
@@ -76,9 +77,12 @@ const App = () => {
                 <C.AreaAddFile>
                   <label htmlFor='selecao-arquivo'>
                   <C.AddFile>
-                    <img src={AddIcon}/>
+                    {!uploading && <img src={AddIcon}/>}
+                    {uploading && <img src={UploadIcon}/>}
+                    
                     {!loadImage && <p> Adicione um arquivo</p>}
-                    {loadImage && <p>{selectedImage}</p>}
+                    {loadImage && !uploading && <p>{selectedImage}</p>}
+                    {loadImage && uploading && <p>Enviando...</p>}
 
                   </C.AddFile>
                   </label>
@@ -90,11 +94,11 @@ const App = () => {
             </C.Card>
             
             {!loading && images.length > 0 &&
-              <div>
+              <C.Card>
               {images.map((item, index)=>(
                 <ImageItem key={index} url={item.url} name={item.name} />
               ))}
-              </div>
+              </C.Card>
             }
 
         </C.Grid>
